@@ -16,12 +16,16 @@ public class Main {
 			+ "|1: Gerar Estatisticas                    |\n"
 			+ "|2: Salvar Registros                      |\n"
 			+ "|3: Salvar Dados Estatisticos             |\n"
+			+ "|4: Pegar Dados de outro ano              |\n"
 			+ "===========================================",
 		t3 = "============================================\n"
 			+ "|Qual operação deseja fazer?              |\n"
 			+ "|1: Salvar JSON.                          |\n"
 			+ "|2: Salvar XML.                           |\n"
-			+ "==========================================="
+			+ "===========================================",
+		t4 = "============================================\n"
+		   + "|Valor inválido! Tente novamente           |\n"
+		   + "============================================"
 			;
 		
 		
@@ -33,10 +37,12 @@ public class Main {
 		while (true) {
 		System.out.println(t1);
 		try {
-			controle.getDados(scanner.nextLine());
+			String str = scanner.nextLine();
+			Integer.parseInt(str);
+			controle.getDados(str);
 			break;
 		} catch (NumberFormatException e) {
-			System.out.println("Valor inválido! Tente novamente.");
+			System.out.println(t4);
 		}
 		}
 		
@@ -51,22 +57,35 @@ public class Main {
 		    case "2":  
 		    	System.out.println(t3);
 		    	String resposta2 = scanner.nextLine();
-		    		if (resposta2.equals("JSON")) {
+		    		if (resposta2.equals("1")) {
 		    			controle.salvarJson();
-		    		} else if (resposta2.equals("XML")){
+		    		} else if (resposta2.equals("2")){
 		    			controle.salvarXML();
-		    		}
+		    		} else {System.out.println(t4);}
 		    	break;
 		    case "3": 
 		    	System.out.println(t3);
 		    	String resposta3 = scanner.nextLine();
-		    		if (resposta3.equals("JSON")) {
+		    		if (resposta3.equals("1")) {
 		    			controle.salvarEstatisticaJson();
-		    		} else if (resposta3.equals("XML")){
+		    		} else if (resposta3.equals("2")){
 		    			controle.salvarEstatisticaXML();
-		    		}
+		    		} else {System.out.println(t4);}
 		    	break;
-		    default: break loop;
+		    case "4": 
+				while (true) {
+					System.out.println(t1);
+					try {
+						String str = scanner.nextLine();
+						Integer.parseInt(str);
+						controle.getDados(str);
+						break;
+					} catch (NumberFormatException e) {
+						System.out.println(t4);
+					}
+					}
+		    	break;
+		    default: System.out.println(t4); break;
 			}
 		}
 	}
